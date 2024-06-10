@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:storage/storage.dart';
-import 'package:treasure_hunter_api_client/treasure_hunt_api_client.dart';
+import 'package:treasure_hunter_api_client/treasure_hunter_api_client.dart';
 
 abstract class TreasureHunterApiFakerStorageKeys {
   static const userTreasures = '__user_treasures_key__';
