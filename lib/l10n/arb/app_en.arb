@@ -39,5 +39,11 @@
     "type": "text",
     "context": "TreasureHunt:TreasureHuntPage",
     "description": "Text shown on the treasure hunt page title"
+  },
+  "searchForTreasuresButtonText": "Search for treasures",
+  "@searchForTreasuresButtonText": {
+    "type": "text",
+    "context": "TreasureHunt:TreasureHuntPage",
+    "description": "Text shown on the search for treasures button"
   }
 }

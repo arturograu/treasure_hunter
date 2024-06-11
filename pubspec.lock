@@ -152,6 +152,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -208,6 +216,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.9.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -405,6 +421,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
+  storage:
+    dependency: transitive
+    description:
+      path: "packages/storage/storage"
+      relative: true
+    source: path
+    version: "0.0.0"
   stream_channel:
     dependency: transitive
     description:
@@ -453,6 +476,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.0"
+  treasure_hunter_api_client:
+    dependency: transitive
+    description:
+      path: "packages/treasure_hunter_api_client"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  treasures_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/treasures_repository"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   typed_data:
     dependency: transitive
     description:

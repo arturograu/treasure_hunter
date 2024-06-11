@@ -14,8 +14,20 @@ class TreasureHunt extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.treasureHuntPageTitle),
       ),
-      body: const Center(
-        child: Text('Treasure Hunt Page'),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            const Spacer(),
+            const Icon(Icons.map_rounded, size: 100),
+            const Spacer(),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text(l10n.searchForTreasuresButtonText),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
