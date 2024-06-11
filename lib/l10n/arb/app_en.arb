@@ -1,7 +1,43 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "counterAppBarTitle": "Counter",
+  "@counterAppBarTitle": {
+    "description": "Text shown in the AppBar of the Counter Page"
+  },
+  "homePageBottomNavigationCollection": "Collection",
+  "@homePageBottomNavigationCollection": {
+    "type": "text",
+    "context": "Home:HomePage",
+    "description": "Text shown on the home page bottom navigation collection"
+  },
+  "homePageBottomNavigationTreasureHunt": "Treasure Hunt",
+  "@homePageBottomNavigationTreasureHunt": {
+    "type": "text",
+    "context": "Home:HomePage",
+    "description": "Text shown on the home page bottom navigation treasure hunte"
+  },
+  "homePageBottomNavigationMyAccount": "My Account",
+  "@homePageBottomNavigationMyAccount": {
+    "type": "text",
+    "context": "Home:HomePage",
+    "description": "Text shown on the home page bottom navigation my account"
+  },
+  "treasuresCollectionPageTitle": "Treasures Collection",
+  "@treasuresCollectionPageTitle": {
+    "type": "text",
+    "context": "TreasuresCollection:TreasuresCollectionPage",
+    "description": "Text shown on the treasures collection page title"
+  },
+  "myAccountPageTitle": "My account",
+  "@myAccountPageTitle": {
+    "type": "text",
+    "context": "MyAccount:MyAccountPage",
+    "description": "Text shown on the my account page title"
+  },
+  "treasureHuntPageTitle": "Treasure Hunt",
+  "@treasureHuntPageTitle": {
+    "type": "text",
+    "context": "TreasureHunt:TreasureHuntPage",
+    "description": "Text shown on the treasure hunt page title"
+  }
 }

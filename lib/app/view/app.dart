@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:treasure_hunter/counter/counter.dart';
+import 'package:treasure_hunter/home/view/home_page.dart';
 import 'package:treasure_hunter/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
