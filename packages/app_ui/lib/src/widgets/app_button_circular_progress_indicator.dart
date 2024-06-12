@@ -9,10 +9,11 @@ class AppButtonCircularProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox.square(
+    final theme = Theme.of(context);
+    return SizedBox.square(
       dimension: 18,
       child: CircularProgressIndicator(
-        color: Colors.white,
+        color: theme.primaryColor,
       ),
     );
   }

@@ -70,7 +70,7 @@ class UserRepository {
   /// Add a treasure to the user's collection of treasures.
   ///
   /// [treasureId] - The ID of the treasure to add.
-  Future<List<Treasure>> addTreasure(String treasureId) async {
+  Future<List<Treasure>> collectTreasure(String treasureId) async {
     final userTreasures = await _apiClient.addUserTreasure(treasureId);
     return userTreasures.map(Treasure.fromApi).toList();
   }

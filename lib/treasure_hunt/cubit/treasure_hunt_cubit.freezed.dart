@@ -21,7 +21,8 @@ mixin _$TreasureHuntState {
     required TResult Function() initial,
     required TResult Function() searching,
     required TResult Function() noTreasuresFound,
-    required TResult Function(Treasure treasure) treasureFound,
+    required TResult Function(Treasure treasure, bool isCollectingTreasure)
+        treasureFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +30,8 @@ mixin _$TreasureHuntState {
     TResult? Function()? initial,
     TResult? Function()? searching,
     TResult? Function()? noTreasuresFound,
-    TResult? Function(Treasure treasure)? treasureFound,
+    TResult? Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +39,8 @@ mixin _$TreasureHuntState {
     TResult Function()? initial,
     TResult Function()? searching,
     TResult Function()? noTreasuresFound,
-    TResult Function(Treasure treasure)? treasureFound,
+    TResult Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +130,8 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() searching,
     required TResult Function() noTreasuresFound,
-    required TResult Function(Treasure treasure) treasureFound,
+    required TResult Function(Treasure treasure, bool isCollectingTreasure)
+        treasureFound,
   }) {
     return initial();
   }
@@ -138,7 +142,8 @@ class _$InitialImpl implements Initial {
     TResult? Function()? initial,
     TResult? Function()? searching,
     TResult? Function()? noTreasuresFound,
-    TResult? Function(Treasure treasure)? treasureFound,
+    TResult? Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
   }) {
     return initial?.call();
   }
@@ -149,7 +154,8 @@ class _$InitialImpl implements Initial {
     TResult Function()? initial,
     TResult Function()? searching,
     TResult Function()? noTreasuresFound,
-    TResult Function(Treasure treasure)? treasureFound,
+    TResult Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -241,7 +247,8 @@ class _$SearchingImpl implements Searching {
     required TResult Function() initial,
     required TResult Function() searching,
     required TResult Function() noTreasuresFound,
-    required TResult Function(Treasure treasure) treasureFound,
+    required TResult Function(Treasure treasure, bool isCollectingTreasure)
+        treasureFound,
   }) {
     return searching();
   }
@@ -252,7 +259,8 @@ class _$SearchingImpl implements Searching {
     TResult? Function()? initial,
     TResult? Function()? searching,
     TResult? Function()? noTreasuresFound,
-    TResult? Function(Treasure treasure)? treasureFound,
+    TResult? Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
   }) {
     return searching?.call();
   }
@@ -263,7 +271,8 @@ class _$SearchingImpl implements Searching {
     TResult Function()? initial,
     TResult Function()? searching,
     TResult Function()? noTreasuresFound,
-    TResult Function(Treasure treasure)? treasureFound,
+    TResult Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -355,7 +364,8 @@ class _$NoTreasuresFoundImpl implements NoTreasuresFound {
     required TResult Function() initial,
     required TResult Function() searching,
     required TResult Function() noTreasuresFound,
-    required TResult Function(Treasure treasure) treasureFound,
+    required TResult Function(Treasure treasure, bool isCollectingTreasure)
+        treasureFound,
   }) {
     return noTreasuresFound();
   }
@@ -366,7 +376,8 @@ class _$NoTreasuresFoundImpl implements NoTreasuresFound {
     TResult? Function()? initial,
     TResult? Function()? searching,
     TResult? Function()? noTreasuresFound,
-    TResult? Function(Treasure treasure)? treasureFound,
+    TResult? Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
   }) {
     return noTreasuresFound?.call();
   }
@@ -377,7 +388,8 @@ class _$NoTreasuresFoundImpl implements NoTreasuresFound {
     TResult Function()? initial,
     TResult Function()? searching,
     TResult Function()? noTreasuresFound,
-    TResult Function(Treasure treasure)? treasureFound,
+    TResult Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
     required TResult orElse(),
   }) {
     if (noTreasuresFound != null) {
@@ -434,7 +446,7 @@ abstract class _$$TreasureFoundImplCopyWith<$Res> {
           _$TreasureFoundImpl value, $Res Function(_$TreasureFoundImpl) then) =
       __$$TreasureFoundImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Treasure treasure});
+  $Res call({Treasure treasure, bool isCollectingTreasure});
 
   $TreasureCopyWith<$Res> get treasure;
 }
@@ -451,12 +463,17 @@ class __$$TreasureFoundImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? treasure = null,
+    Object? isCollectingTreasure = null,
   }) {
     return _then(_$TreasureFoundImpl(
       treasure: null == treasure
           ? _value.treasure
           : treasure // ignore: cast_nullable_to_non_nullable
               as Treasure,
+      isCollectingTreasure: null == isCollectingTreasure
+          ? _value.isCollectingTreasure
+          : isCollectingTreasure // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -472,14 +489,18 @@ class __$$TreasureFoundImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TreasureFoundImpl implements TreasureFound {
-  const _$TreasureFoundImpl({required this.treasure});
+  const _$TreasureFoundImpl(
+      {required this.treasure, this.isCollectingTreasure = false});
 
   @override
   final Treasure treasure;
+  @override
+  @JsonKey()
+  final bool isCollectingTreasure;
 
   @override
   String toString() {
-    return 'TreasureHuntState.treasureFound(treasure: $treasure)';
+    return 'TreasureHuntState.treasureFound(treasure: $treasure, isCollectingTreasure: $isCollectingTreasure)';
   }
 
   @override
@@ -488,11 +509,13 @@ class _$TreasureFoundImpl implements TreasureFound {
         (other.runtimeType == runtimeType &&
             other is _$TreasureFoundImpl &&
             (identical(other.treasure, treasure) ||
-                other.treasure == treasure));
+                other.treasure == treasure) &&
+            (identical(other.isCollectingTreasure, isCollectingTreasure) ||
+                other.isCollectingTreasure == isCollectingTreasure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, treasure);
+  int get hashCode => Object.hash(runtimeType, treasure, isCollectingTreasure);
 
   @JsonKey(ignore: true)
   @override
@@ -506,9 +529,10 @@ class _$TreasureFoundImpl implements TreasureFound {
     required TResult Function() initial,
     required TResult Function() searching,
     required TResult Function() noTreasuresFound,
-    required TResult Function(Treasure treasure) treasureFound,
+    required TResult Function(Treasure treasure, bool isCollectingTreasure)
+        treasureFound,
   }) {
-    return treasureFound(treasure);
+    return treasureFound(treasure, isCollectingTreasure);
   }
 
   @override
@@ -517,9 +541,10 @@ class _$TreasureFoundImpl implements TreasureFound {
     TResult? Function()? initial,
     TResult? Function()? searching,
     TResult? Function()? noTreasuresFound,
-    TResult? Function(Treasure treasure)? treasureFound,
+    TResult? Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
   }) {
-    return treasureFound?.call(treasure);
+    return treasureFound?.call(treasure, isCollectingTreasure);
   }
 
   @override
@@ -528,11 +553,12 @@ class _$TreasureFoundImpl implements TreasureFound {
     TResult Function()? initial,
     TResult Function()? searching,
     TResult Function()? noTreasuresFound,
-    TResult Function(Treasure treasure)? treasureFound,
+    TResult Function(Treasure treasure, bool isCollectingTreasure)?
+        treasureFound,
     required TResult orElse(),
   }) {
     if (treasureFound != null) {
-      return treasureFound(treasure);
+      return treasureFound(treasure, isCollectingTreasure);
     }
     return orElse();
   }
@@ -576,10 +602,12 @@ class _$TreasureFoundImpl implements TreasureFound {
 }
 
 abstract class TreasureFound implements TreasureHuntState {
-  const factory TreasureFound({required final Treasure treasure}) =
-      _$TreasureFoundImpl;
+  const factory TreasureFound(
+      {required final Treasure treasure,
+      final bool isCollectingTreasure}) = _$TreasureFoundImpl;
 
   Treasure get treasure;
+  bool get isCollectingTreasure;
   @JsonKey(ignore: true)
   _$$TreasureFoundImplCopyWith<_$TreasureFoundImpl> get copyWith =>
       throw _privateConstructorUsedError;

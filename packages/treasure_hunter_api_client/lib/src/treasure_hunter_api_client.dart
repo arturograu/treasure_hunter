@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:storage/storage.dart';
+import 'package:treasure_hunter_api_client/src/mocks/available_treasures_mock.dart';
 import 'package:treasure_hunter_api_client/src/treasure_hunter_api_faker.dart';
 import 'package:treasure_hunter_api_client/treasure_hunter_api_client.dart';
 
@@ -56,7 +55,7 @@ class TreasureHunterApiClient {
       throw Exception('User already has this treasure as a favourite');
     }
 
-    final allTreasures = await _allTreasures;
+    final allTreasures = availableTreasuresMock.map(Treasure.fromJson).toList();
     final treasure = allTreasures.firstWhere((t) => t.id == treasureId);
     final updatedUser = await _treasureHunterApiFaker.updateUser(
       favouriteTreasures: [...user.favouriteTreasures, treasure],
@@ -108,7 +107,7 @@ class TreasureHunterApiClient {
       throw Exception('User already has this treasure');
     }
 
-    final allTreasures = await _allTreasures;
+    final allTreasures = availableTreasuresMock.map(Treasure.fromJson).toList();
 
     return _treasureHunterApiFaker.addUserTreasure(
       treasure: allTreasures.firstWhere((t) => t.id == treasureId),
@@ -120,12 +119,7 @@ class TreasureHunterApiClient {
     // fake a delay of 1-3 seconds
     await Future<void>.delayed(Duration(seconds: Random().nextInt(3) + 1));
 
-    // 1/3 of the time, return no treasure
-    if (Random().nextInt(3) == 0) {
-      return null;
-    }
-
-    final allTreasures = await _allTreasures;
+    final allTreasures = availableTreasuresMock.map(Treasure.fromJson).toList();
     final userTreasures = await _treasureHunterApiFaker.fetchUserTreasures();
 
     // Filter out treasures that the user already has
@@ -141,14 +135,5 @@ class TreasureHunterApiClient {
 
     // Pick and return a random treasure from the filtered list
     return filteredTreasures[Random().nextInt(filteredTreasures.length)];
-  }
-
-  Future<List<Treasure>> get _allTreasures async {
-    final allTreasuresString =
-        await File('./mocks/available_treasures_mock.json').readAsString();
-    final allTreasuresJson =
-        jsonDecode(allTreasuresString) as List<Map<String, dynamic>>;
-
-    return allTreasuresJson.map(Treasure.fromJson).toList();
   }
 }

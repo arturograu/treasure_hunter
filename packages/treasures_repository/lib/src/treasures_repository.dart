@@ -14,11 +14,6 @@ class TreasuresRepository {
   /// Returns the found treasure or `null` if no treasure was found.
   Future<Treasure?> searchForTreasure() async {
     final result = await _apiClient.searchTreasures();
-
-    if (result == null) {
-      return null;
-    }
-
-    return Treasure.fromApi(result);
+    return result != null ? Treasure.fromApi(result) : null;
   }
 }

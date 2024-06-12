@@ -10,5 +10,6 @@ sealed class TreasureHuntState with _$TreasureHuntState {
 
   const factory TreasureHuntState.treasureFound({
     required Treasure treasure,
+    @Default(false) bool isCollectingTreasure,
   }) = TreasureFound;
 }

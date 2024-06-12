@@ -59,17 +59,7 @@ class TreasureHunterApiFaker {
       value: jsonEncode([...currentTreasures, treasure]),
     );
 
-    final updatedTreasures = await _storage.read(
-      key: TreasureHunterApiFakerStorageKeys.userTreasures,
-    );
-
-    if (updatedTreasures == null) {
-      throw Exception('Failed to add treasure');
-    }
-
-    final treasuresJson =
-        jsonDecode(updatedTreasures) as List<Map<String, dynamic>>;
-    return treasuresJson.map(Treasure.fromJson).toList();
+    return fetchUserTreasures();
   }
 
   Future<List<Treasure>> fetchUserTreasures() async {
@@ -81,7 +71,9 @@ class TreasureHunterApiFaker {
       return [];
     }
 
-    final treasuresJson = jsonDecode(treasures) as List<Map<String, dynamic>>;
+    final treasuresJson = (jsonDecode(treasures) as List)
+        .map((item) => item as Map<String, dynamic>)
+        .toList();
     return treasuresJson.map(Treasure.fromJson).toList();
   }
 }
