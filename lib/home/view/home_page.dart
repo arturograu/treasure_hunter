@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:treasure_hunter/collected_treasures/view/collected_treasures_page.dart';
 import 'package:treasure_hunter/home/view/bottom_nav_bar.dart';
 import 'package:treasure_hunter/l10n/l10n.dart';
 import 'package:treasure_hunter/my_account/my_account.dart';
 import 'package:treasure_hunter/treasure_hunt/view/view.dart';
-import 'package:treasure_hunter/treasures_collection/view/treasures_collection_page.dart';
 
 enum HomeTab {
   treasuresCollection,
@@ -94,7 +94,7 @@ class _TabNavigator extends StatelessWidget {
     return Navigator(
       onPopPage: (route, result) => route.didPop(result),
       pages: switch (tabItem) {
-        HomeTab.treasuresCollection => [TreasuresCollection.page()],
+        HomeTab.treasuresCollection => [CollectedTreasures.page()],
         HomeTab.treasureHunt => [TreasureHunt.page()],
         HomeTab.myAccount => [MyAccount.page()],
       },

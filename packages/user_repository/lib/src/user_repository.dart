@@ -41,11 +41,28 @@ class UserRepository {
     _userController.add(User.fromApi(user));
   }
 
+  /// Fetch all collected treasures.
+  ///
+  /// Returns a list of [Treasure]s.
+  Future<List<Treasure>> fetchAllCollectedTreasures() async {
+    final userTreasures = await _apiClient.fetchUserTreasures();
+    return userTreasures.map(Treasure.fromApi).toList();
+  }
+
   /// Add a treasure to the user's favourite treasures.
   ///
   /// [treasureId] - The ID of the treasure to add.
   Future<void> markTreasureAsFavourite(String treasureId) async {
     await _apiClient.addUserFavouriteTreasure(treasureId);
+    final user = await _apiClient.fetchCurrentUser();
+    _userController.add(User.fromApi(user));
+  }
+
+  /// Remove a treasure from the user's favourite treasures.
+  ///
+  /// [treasureId] - The ID of the treasure to remove.
+  Future<void> removeTreasureFromFavourites(String treasureId) async {
+    await _apiClient.removeUserFavouriteTreasure(treasureId);
     final user = await _apiClient.fetchCurrentUser();
     _userController.add(User.fromApi(user));
   }

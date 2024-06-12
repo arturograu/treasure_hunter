@@ -44,6 +44,8 @@ class TreasureHunterApiClient {
   ///
   /// Supported parameters:
   /// * [treasureId] - The ID of the treasure to add.
+  ///
+  /// Returns a list of the user's favourite treasures.
   Future<List<Treasure>> addUserFavouriteTreasure(String treasureId) async {
     // fake a delay of 1-3 seconds
     await Future<void>.delayed(Duration(seconds: Random().nextInt(3) + 1));
@@ -58,6 +60,29 @@ class TreasureHunterApiClient {
     final treasure = allTreasures.firstWhere((t) => t.id == treasureId);
     final updatedUser = await _treasureHunterApiFaker.updateUser(
       favouriteTreasures: [...user.favouriteTreasures, treasure],
+    );
+    return updatedUser.favouriteTreasures;
+  }
+
+  /// Remove a treasure from the user favourite treasures.
+  ///
+  /// Supported parameters:
+  /// * [treasureId] - The ID of the treasure to remove.
+  ///
+  /// Returns a list of the user's favourite treasures.
+  Future<List<Treasure>> removeUserFavouriteTreasure(String treasureId) async {
+    // fake a delay of 1-3 seconds
+    await Future<void>.delayed(Duration(seconds: Random().nextInt(3) + 1));
+
+    final user = await _treasureHunterApiFaker.fetchCurrentUser();
+
+    if (!user.favouriteTreasures.any((t) => t.id == treasureId)) {
+      throw Exception('User does not have this treasure as a favourite');
+    }
+
+    final updatedUser = await _treasureHunterApiFaker.updateUser(
+      favouriteTreasures:
+          user.favouriteTreasures.where((t) => t.id != treasureId).toList(),
     );
     return updatedUser.favouriteTreasures;
   }
