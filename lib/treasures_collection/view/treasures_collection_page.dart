@@ -95,6 +95,9 @@ class _TreasureCollectionTypeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SegmentedButton<_ListType>(
+      selected: <_ListType>{selectedType},
+      showSelectedIcon: false,
+      onSelectionChanged: onSelectionChanged,
       segments: const <ButtonSegment<_ListType>>[
         ButtonSegment<_ListType>(
           value: _ListType.all,
@@ -107,8 +110,6 @@ class _TreasureCollectionTypeSelector extends StatelessWidget {
           icon: Icon(Icons.favorite_rounded),
         ),
       ],
-      selected: <_ListType>{selectedType},
-      onSelectionChanged: onSelectionChanged,
     );
   }
 }

@@ -11,7 +11,7 @@ abstract class User with _$User {
     required String id,
     required String name,
     required String email,
-    required List<Treasure> favouriteTreasures,
+    @Default(<Treasure>[]) List<Treasure> favouriteTreasures,
   }) = _User;
 
   factory User.fromApi(api_client.User userApi) => User(

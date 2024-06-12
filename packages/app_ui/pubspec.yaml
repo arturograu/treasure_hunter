@@ -1,0 +1,22 @@
+name: app_ui
+description: App UI Component Library
+publish_to: none
+
+environment:
+  sdk: "^3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_markdown: ^0.6.16
+  form_inputs:
+    path: ../form_inputs
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.1.0
+
+flutter:
+  uses-material-design: true

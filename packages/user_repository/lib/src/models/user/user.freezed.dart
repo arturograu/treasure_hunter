@@ -133,7 +133,7 @@ class _$UserImpl implements _User {
       {required this.id,
       required this.name,
       required this.email,
-      required final List<Treasure> favouriteTreasures})
+      final List<Treasure> favouriteTreasures = const <Treasure>[]})
       : _favouriteTreasures = favouriteTreasures;
 
   @override
@@ -144,6 +144,7 @@ class _$UserImpl implements _User {
   final String email;
   final List<Treasure> _favouriteTreasures;
   @override
+  @JsonKey()
   List<Treasure> get favouriteTreasures {
     if (_favouriteTreasures is EqualUnmodifiableListView)
       return _favouriteTreasures;
@@ -184,7 +185,7 @@ abstract class _User implements User {
       {required final String id,
       required final String name,
       required final String email,
-      required final List<Treasure> favouriteTreasures}) = _$UserImpl;
+      final List<Treasure> favouriteTreasures}) = _$UserImpl;
 
   @override
   String get id;
