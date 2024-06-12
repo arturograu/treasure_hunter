@@ -11,12 +11,16 @@ typedef UserController = StreamController<User>;
 class UserRepository {
   UserRepository({
     required api_client.TreasureHunterApiClient apiClient,
-  }) : _apiClient = apiClient;
+  }) : _apiClient = apiClient {
+    _apiClient.fetchCurrentUser().then((user) {
+      _userController.add(User.fromApi(user));
+    });
+  }
 
   final api_client.TreasureHunterApiClient _apiClient;
 
-  /// Stream of [api_client.User] which will emit the current user when the user changes
-  /// in the data layer.
+  /// Stream of [api_client.User] which will emit the current user when the
+  /// user changes in the data layer.
   Stream<User> get user => _userController.stream;
 
   final _userController = UserController.broadcast();

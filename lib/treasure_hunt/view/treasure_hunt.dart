@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:treasure_hunter/app/cubit/app_cubit.dart';
 import 'package:treasure_hunter/l10n/l10n.dart';
 
 class TreasureHunt extends StatelessWidget {
@@ -10,9 +12,10 @@ class TreasureHunt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final appState = context.read<AppCubit>().state;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.treasureHuntPageTitle),
+        title: Text('Welcome ${appState.user.name}!'),
       ),
       body: SizedBox(
         width: double.infinity,
