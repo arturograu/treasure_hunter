@@ -86,7 +86,7 @@ class CollectedTreasuresBloc
 
     // We check if the change in the favourite status is to add the treasure to
     // the favourites or to remove it from the favourites.
-    final isFavouriteAddition = state.favouriteTreasures.contains(id);
+    final isFavouriteAddition = !state.favouriteTreasures.contains(id);
 
     // We check if the treasure is already in the list of pending additions or
     // deletions to avoid adding it multiple times.
@@ -101,7 +101,7 @@ class CollectedTreasuresBloc
       // multiple times and to indicate the UI that an addition is pending.
       emit(
         state.copyWith(
-          pendingFavouriteAdditions: state.pendingFavouriteAdditions..add(id),
+          pendingFavouriteAdditions: {...state.pendingFavouriteAdditions, id},
         ),
       );
 
@@ -112,8 +112,7 @@ class CollectedTreasuresBloc
         // We update the state to reflect the change.
         emit(
           state.copyWith(
-            favouriteTreasures: state.favouriteTreasures..add(id),
-            pendingFavouriteAdditions: state.pendingFavouriteAdditions
+            pendingFavouriteAdditions: {...state.pendingFavouriteAdditions}
               ..remove(id),
           ),
         );
@@ -123,36 +122,35 @@ class CollectedTreasuresBloc
         // additions.
         emit(
           state.copyWith(
-            pendingFavouriteAdditions: state.pendingFavouriteAdditions
+            pendingFavouriteAdditions: {...state.pendingFavouriteAdditions}
               ..remove(id),
           ),
         );
       }
+    }
 
-      if (!isFavouriteAddition) {
+    if (!isFavouriteAddition) {
+      emit(
+        state.copyWith(
+          pendingFavouriteDeletions: {...state.pendingFavouriteDeletions, id},
+        ),
+      );
+      try {
+        await _userRepository.removeTreasureFromFavourites(event.id);
         emit(
           state.copyWith(
-            pendingFavouriteDeletions: state.pendingFavouriteDeletions..add(id),
+            pendingFavouriteDeletions: {...state.pendingFavouriteDeletions}
+              ..remove(id),
           ),
         );
-        try {
-          await _userRepository.removeTreasureFromFavourites(event.id);
-          emit(
-            state.copyWith(
-              favouriteTreasures: state.favouriteTreasures..remove(id),
-              pendingFavouriteDeletions: state.pendingFavouriteDeletions
-                ..remove(id),
-            ),
-          );
-          return;
-        } on Exception {
-          emit(
-            state.copyWith(
-              pendingFavouriteDeletions: state.pendingFavouriteDeletions
-                ..remove(id),
-            ),
-          );
-        }
+        return;
+      } on Exception {
+        emit(
+          state.copyWith(
+            pendingFavouriteDeletions: {...state.pendingFavouriteDeletions}
+              ..remove(id),
+          ),
+        );
       }
     }
   }

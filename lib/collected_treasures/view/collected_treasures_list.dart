@@ -21,19 +21,13 @@ class CollectedTreasuresList extends StatelessWidget {
         height: 1,
         color: Colors.grey.withOpacity(0.5),
       ),
-      itemBuilder: (context, index) => _Item(
-        key: Key('treasuresList_tile_$index'),
-        id: _treasures[index].id,
-      ),
+      itemBuilder: (_, index) => _Item(_treasures[index].id),
     );
   }
 }
 
 class _Item extends StatelessWidget {
-  const _Item({
-    required this.id,
-    super.key,
-  });
+  const _Item(this.id);
 
   final String id;
 
@@ -41,6 +35,10 @@ class _Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CollectedTreasuresBloc, CollectedTreasuresState>(
       buildWhen: (previous, current) =>
+          previous.allCollectedTreasures.containsKey(id) !=
+              current.allCollectedTreasures.containsKey(id) ||
+          previous.favouriteTreasures.contains(id) !=
+              current.favouriteTreasures.contains(id) ||
           previous.pendingFavouriteAdditions.contains(id) !=
               current.pendingFavouriteAdditions.contains(id) ||
           previous.pendingFavouriteDeletions.contains(id) !=
@@ -57,21 +55,24 @@ class _Item extends StatelessWidget {
             state.pendingFavouriteDeletions.contains(id);
 
         return ListTile(
+          key: Key('treasuresList_tile_${item.id}'),
           title: Text(item.name),
           subtitle: Text(item.description),
-          trailing: isLoading
-              ? const AppButtonCircularProgressIndicator()
-              : IconButton(
-                  icon: Icon(
+          trailing: IconButton(
+            icon: isLoading
+                ? const AppButtonCircularProgressIndicator()
+                : Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_border,
                     color: isFavorite ? Colors.red : null,
                   ),
-                  onPressed: () => context.read<CollectedTreasuresBloc>().add(
-                        CollectedTreasuresEvent.treasureFavouriteStatusChanged(
-                          id,
-                        ),
+            onPressed: () => isLoading
+                ? {}
+                : context.read<CollectedTreasuresBloc>().add(
+                      CollectedTreasuresEvent.treasureFavouriteStatusChanged(
+                        id,
                       ),
-                ),
+                    ),
+          ),
         );
       },
     );

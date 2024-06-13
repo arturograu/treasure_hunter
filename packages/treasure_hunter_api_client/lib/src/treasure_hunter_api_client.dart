@@ -133,6 +133,11 @@ class TreasureHunterApiClient {
     // fake a delay of 1-3 seconds
     await Future<void>.delayed(Duration(seconds: Random().nextInt(3) + 1));
 
+    // 2/3 of the time return no treasure
+    if (Random().nextDouble() < 2 / 3) {
+      return null;
+    }
+
     final allTreasures = availableTreasuresMock.map(Treasure.fromJson).toList();
     final userTreasures = await _treasureHunterApiFaker.fetchUserTreasures();
 

@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:treasure_hunter_api_client/treasure_hunter_api_client.dart'
     as api_client;
-import 'package:treasures_repository/treasures_repository.dart';
 
 part 'user.freezed.dart';
 

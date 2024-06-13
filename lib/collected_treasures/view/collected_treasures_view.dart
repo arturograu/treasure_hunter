@@ -14,34 +14,12 @@ class CollectedTreasuresView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CollectedTreasuresBloc, CollectedTreasuresState>(
-      builder: (context, state) => switch (state.status) {
-        CollectedTreasuresStatus.initial => const _InitialView(),
-        CollectedTreasuresStatus.loading => const _LoadingView(),
-        CollectedTreasuresStatus.loaded => _LoadedView(
-            selectedList: selectedList,
-            allCollectedTreasures: state.allCollectedTreasures,
-            favouriteTreasures: state.favouriteTreasures,
-          ),
-      },
+      builder: (context, state) => _LoadedView(
+        selectedList: selectedList,
+        allCollectedTreasures: state.allCollectedTreasures,
+        favouriteTreasures: state.favouriteTreasures,
+      ),
     );
-  }
-}
-
-class _InitialView extends StatelessWidget {
-  const _InitialView();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('Bloc not initialized'));
-  }
-}
-
-class _LoadingView extends StatelessWidget {
-  const _LoadingView();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
   }
 }
 
@@ -57,14 +35,24 @@ class _LoadedView extends StatelessWidget {
   final Set<String> favouriteTreasures;
 
   @override
-  Widget build(BuildContext context) => switch (selectedList) {
-        ListType.all => CollectedTreasuresList(
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Offstage(
+          offstage: selectedList != ListType.all,
+          child: CollectedTreasuresList(
             treasures: allCollectedTreasures.values.toList(),
           ),
-        ListType.favourites => CollectedTreasuresList(
+        ),
+        Offstage(
+          offstage: selectedList != ListType.favourites,
+          child: CollectedTreasuresList(
             treasures: allCollectedTreasures.values
                 .where((treasure) => favouriteTreasures.contains(treasure.id))
                 .toList(),
-          )
-      };
+          ),
+        ),
+      ],
+    );
+  }
 }
