@@ -604,7 +604,6 @@ mixin _$CollectedTreasuresState {
       throw _privateConstructorUsedError;
   Set<String> get pendingFavouriteAdditions =>
       throw _privateConstructorUsedError;
-  CollectedTreasuresStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CollectedTreasuresStateCopyWith<CollectedTreasuresState> get copyWith =>
@@ -621,8 +620,7 @@ abstract class $CollectedTreasuresStateCopyWith<$Res> {
       {Map<String, Treasure> allCollectedTreasures,
       Set<String> favouriteTreasures,
       Set<String> pendingFavouriteDeletions,
-      Set<String> pendingFavouriteAdditions,
-      CollectedTreasuresStatus status});
+      Set<String> pendingFavouriteAdditions});
 }
 
 /// @nodoc
@@ -643,7 +641,6 @@ class _$CollectedTreasuresStateCopyWithImpl<$Res,
     Object? favouriteTreasures = null,
     Object? pendingFavouriteDeletions = null,
     Object? pendingFavouriteAdditions = null,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       allCollectedTreasures: null == allCollectedTreasures
@@ -662,10 +659,6 @@ class _$CollectedTreasuresStateCopyWithImpl<$Res,
           ? _value.pendingFavouriteAdditions
           : pendingFavouriteAdditions // ignore: cast_nullable_to_non_nullable
               as Set<String>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as CollectedTreasuresStatus,
     ) as $Val);
   }
 }
@@ -683,8 +676,7 @@ abstract class _$$CollectedTreasuresStateImplCopyWith<$Res>
       {Map<String, Treasure> allCollectedTreasures,
       Set<String> favouriteTreasures,
       Set<String> pendingFavouriteDeletions,
-      Set<String> pendingFavouriteAdditions,
-      CollectedTreasuresStatus status});
+      Set<String> pendingFavouriteAdditions});
 }
 
 /// @nodoc
@@ -704,7 +696,6 @@ class __$$CollectedTreasuresStateImplCopyWithImpl<$Res>
     Object? favouriteTreasures = null,
     Object? pendingFavouriteDeletions = null,
     Object? pendingFavouriteAdditions = null,
-    Object? status = null,
   }) {
     return _then(_$CollectedTreasuresStateImpl(
       allCollectedTreasures: null == allCollectedTreasures
@@ -723,10 +714,6 @@ class __$$CollectedTreasuresStateImplCopyWithImpl<$Res>
           ? _value._pendingFavouriteAdditions
           : pendingFavouriteAdditions // ignore: cast_nullable_to_non_nullable
               as Set<String>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as CollectedTreasuresStatus,
     ));
   }
 }
@@ -738,8 +725,7 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
       {required final Map<String, Treasure> allCollectedTreasures,
       required final Set<String> favouriteTreasures,
       final Set<String> pendingFavouriteDeletions = const <String>{},
-      final Set<String> pendingFavouriteAdditions = const <String>{},
-      this.status = CollectedTreasuresStatus.initial})
+      final Set<String> pendingFavouriteAdditions = const <String>{}})
       : _allCollectedTreasures = allCollectedTreasures,
         _favouriteTreasures = favouriteTreasures,
         _pendingFavouriteDeletions = pendingFavouriteDeletions,
@@ -784,12 +770,8 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
   }
 
   @override
-  @JsonKey()
-  final CollectedTreasuresStatus status;
-
-  @override
   String toString() {
-    return 'CollectedTreasuresState(allCollectedTreasures: $allCollectedTreasures, favouriteTreasures: $favouriteTreasures, pendingFavouriteDeletions: $pendingFavouriteDeletions, pendingFavouriteAdditions: $pendingFavouriteAdditions, status: $status)';
+    return 'CollectedTreasuresState(allCollectedTreasures: $allCollectedTreasures, favouriteTreasures: $favouriteTreasures, pendingFavouriteDeletions: $pendingFavouriteDeletions, pendingFavouriteAdditions: $pendingFavouriteAdditions)';
   }
 
   @override
@@ -804,8 +786,7 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
             const DeepCollectionEquality().equals(
                 other._pendingFavouriteDeletions, _pendingFavouriteDeletions) &&
             const DeepCollectionEquality().equals(
-                other._pendingFavouriteAdditions, _pendingFavouriteAdditions) &&
-            (identical(other.status, status) || other.status == status));
+                other._pendingFavouriteAdditions, _pendingFavouriteAdditions));
   }
 
   @override
@@ -814,8 +795,7 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
       const DeepCollectionEquality().hash(_allCollectedTreasures),
       const DeepCollectionEquality().hash(_favouriteTreasures),
       const DeepCollectionEquality().hash(_pendingFavouriteDeletions),
-      const DeepCollectionEquality().hash(_pendingFavouriteAdditions),
-      status);
+      const DeepCollectionEquality().hash(_pendingFavouriteAdditions));
 
   @JsonKey(ignore: true)
   @override
@@ -827,11 +807,11 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
 
 abstract class _CollectedTreasuresState implements CollectedTreasuresState {
   const factory _CollectedTreasuresState(
-      {required final Map<String, Treasure> allCollectedTreasures,
-      required final Set<String> favouriteTreasures,
-      final Set<String> pendingFavouriteDeletions,
-      final Set<String> pendingFavouriteAdditions,
-      final CollectedTreasuresStatus status}) = _$CollectedTreasuresStateImpl;
+          {required final Map<String, Treasure> allCollectedTreasures,
+          required final Set<String> favouriteTreasures,
+          final Set<String> pendingFavouriteDeletions,
+          final Set<String> pendingFavouriteAdditions}) =
+      _$CollectedTreasuresStateImpl;
 
   @override
   Map<String, Treasure> get allCollectedTreasures;
@@ -841,8 +821,6 @@ abstract class _CollectedTreasuresState implements CollectedTreasuresState {
   Set<String> get pendingFavouriteDeletions;
   @override
   Set<String> get pendingFavouriteAdditions;
-  @override
-  CollectedTreasuresStatus get status;
   @override
   @JsonKey(ignore: true)
   _$$CollectedTreasuresStateImplCopyWith<_$CollectedTreasuresStateImpl>

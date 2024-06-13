@@ -1,58 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:treasure_hunter/collected_treasures/collected_treasures.dart';
-import 'package:treasures_repository/treasures_repository.dart';
 
-class CollectedTreasuresView extends StatelessWidget {
+class CollectedTreasuresView extends StatefulWidget {
   const CollectedTreasuresView({
-    required this.selectedList,
+    required this.selectedListController,
     super.key,
   });
 
-  final ListType selectedList;
+  final ValueNotifier<ListType> selectedListController;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CollectedTreasuresBloc, CollectedTreasuresState>(
-      builder: (context, state) => _LoadedView(
-        selectedList: selectedList,
-        allCollectedTreasures: state.allCollectedTreasures,
-        favouriteTreasures: state.favouriteTreasures,
-      ),
-    );
-  }
+  State<CollectedTreasuresView> createState() => _CollectedTreasuresViewState();
 }
 
-class _LoadedView extends StatelessWidget {
-  const _LoadedView({
-    required this.selectedList,
-    required this.allCollectedTreasures,
-    required this.favouriteTreasures,
-  });
+class _CollectedTreasuresViewState extends State<CollectedTreasuresView> {
+  ListType _selectedType = ListType.all;
 
-  final ListType selectedList;
-  final Map<String, Treasure> allCollectedTreasures;
-  final Set<String> favouriteTreasures;
+  @override
+  void initState() {
+    super.initState();
+    widget.selectedListController.addListener(() {
+      setState(() {
+        _selectedType = widget.selectedListController.value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Offstage(
-          offstage: selectedList != ListType.all,
-          child: CollectedTreasuresList(
-            treasures: allCollectedTreasures.values.toList(),
-          ),
+          offstage: _selectedType != ListType.all,
+          child: const _AllTreasuresList(),
         ),
         Offstage(
-          offstage: selectedList != ListType.favourites,
-          child: CollectedTreasuresList(
-            treasures: allCollectedTreasures.values
-                .where((treasure) => favouriteTreasures.contains(treasure.id))
-                .toList(),
-          ),
+          offstage: _selectedType != ListType.favourites,
+          child: const _FavouritesList(),
         ),
       ],
+    );
+  }
+}
+
+class _AllTreasuresList extends StatelessWidget {
+  const _AllTreasuresList();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CollectedTreasuresBloc, CollectedTreasuresState>(
+      builder: (context, state) {
+        return CollectedTreasuresList(
+          key: const Key('all_list'),
+          treasures: state.allCollectedTreasures.values.toList(),
+        );
+      },
+    );
+  }
+}
+
+class _FavouritesList extends StatelessWidget {
+  const _FavouritesList();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CollectedTreasuresBloc, CollectedTreasuresState>(
+      builder: (context, state) {
+        return CollectedTreasuresList(
+          key: const Key('favourites_list'),
+          treasures: state.allCollectedTreasures.values
+              .where(
+                (treasure) => state.favouriteTreasures.contains(treasure.id),
+              )
+              .toList(),
+        );
+      },
     );
   }
 }

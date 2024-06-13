@@ -1,7 +1,5 @@
 part of 'collected_treasures_bloc.dart';
 
-enum CollectedTreasuresStatus { initial, loading, loaded }
-
 @freezed
 class CollectedTreasuresState with _$CollectedTreasuresState {
   const factory CollectedTreasuresState({
@@ -9,6 +7,5 @@ class CollectedTreasuresState with _$CollectedTreasuresState {
     required Set<String> favouriteTreasures,
     @Default(<String>{}) Set<String> pendingFavouriteDeletions,
     @Default(<String>{}) Set<String> pendingFavouriteAdditions,
-    @Default(CollectedTreasuresStatus.initial) CollectedTreasuresStatus status,
   }) = _CollectedTreasuresState;
 }

@@ -7,18 +7,18 @@ import 'package:user_repository/user_repository.dart';
 
 enum ListType { all, favourites }
 
-class CollectedTreasures extends StatefulWidget {
-  const CollectedTreasures({super.key});
+class CollectedTreasures extends StatelessWidget {
+  CollectedTreasures({super.key})
+      : _controller = ValueNotifier<ListType>(ListType.all);
 
   static Page<dynamic> page() =>
-      const MaterialPage<void>(child: CollectedTreasures());
+      MaterialPage<void>(child: CollectedTreasures());
 
-  @override
-  State<CollectedTreasures> createState() => _CollectedTreasuresState();
-}
+  final ValueNotifier<ListType> _controller;
 
-class _CollectedTreasuresState extends State<CollectedTreasures> {
-  ListType _selectedType = ListType.all;
+  void _onSelectionChanged(Set<ListType> selected) {
+    _controller.value = selected.first;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,7 @@ class _CollectedTreasuresState extends State<CollectedTreasures> {
         children: <Widget>[
           const SizedBox(height: 16),
           _TreasureCollectionTypeSelector(
-            selectedType: _selectedType,
-            onSelectionChanged: (selected) {
-              setState(() {
-                _selectedType = selected.first;
-              });
-            },
+            onSelectionChanged: _onSelectionChanged,
           ),
           const SizedBox(height: 16),
           Expanded(
@@ -48,7 +43,9 @@ class _CollectedTreasuresState extends State<CollectedTreasures> {
                     context.read<AppCubit>().state.userFavouriteTreasures,
                 userRepository: context.read<UserRepository>(),
               ),
-              child: CollectedTreasuresView(selectedList: _selectedType),
+              child: CollectedTreasuresView(
+                selectedListController: _controller,
+              ),
             ),
           ),
         ],
@@ -57,21 +54,35 @@ class _CollectedTreasuresState extends State<CollectedTreasures> {
   }
 }
 
-class _TreasureCollectionTypeSelector extends StatelessWidget {
+class _TreasureCollectionTypeSelector extends StatefulWidget {
   const _TreasureCollectionTypeSelector({
-    required this.selectedType,
     required this.onSelectionChanged,
   });
 
-  final ListType selectedType;
   final void Function(Set<ListType>) onSelectionChanged;
+
+  @override
+  State<_TreasureCollectionTypeSelector> createState() =>
+      _TreasureCollectionTypeSelectorState();
+}
+
+class _TreasureCollectionTypeSelectorState
+    extends State<_TreasureCollectionTypeSelector> {
+  ListType _selectedType = ListType.all;
+
+  void _onSelectionChanged(Set<ListType> selected) {
+    setState(() {
+      _selectedType = selected.first;
+    });
+    widget.onSelectionChanged(selected);
+  }
 
   @override
   Widget build(BuildContext context) {
     return SegmentedButton<ListType>(
-      selected: <ListType>{selectedType},
+      selected: <ListType>{_selectedType},
       showSelectedIcon: false,
-      onSelectionChanged: onSelectionChanged,
+      onSelectionChanged: _onSelectionChanged,
       segments: const <ButtonSegment<ListType>>[
         ButtonSegment<ListType>(
           value: ListType.all,
