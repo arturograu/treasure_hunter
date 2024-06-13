@@ -13,7 +13,7 @@ class UserForm extends StatelessWidget {
           label: 'Email',
           hintText: 'John',
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 22),
         const AppEmailTextField(
           key: Key('myAccountForm_emailInput_textField'),
           label: 'Email',
