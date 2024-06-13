@@ -45,7 +45,6 @@ class _TreasureHuntView extends StatelessWidget {
     return BlocBuilder<TreasureHuntCubit, TreasureHuntState>(
       builder: (context, state) {
         final l10n = context.l10n;
-        final theme = Theme.of(context);
         return Column(
           children: [
             const Spacer(),
@@ -56,42 +55,9 @@ class _TreasureHuntView extends StatelessWidget {
                 ),
               Searching() => const Text('Searching for treasures...'),
               NoTreasuresFound() => const Text('No treasures found!'),
-              TreasureFound(
-                :final treasure,
-                :final isCollectingTreasure,
-              ) =>
-                Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    Text(
-                      treasure.name,
-                      style: const TextStyle(fontSize: 18),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      treasure.description,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton.icon(
-                      onPressed: () => isCollectingTreasure
-                          ? null
-                          : context
-                              .read<TreasureHuntCubit>()
-                              .collectTreasure(treasure.id),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: theme.primaryColor,
-                      ),
-                      icon: const Icon(
-                        Icons.add_rounded,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        isCollectingTreasure ? 'Collecting...' : 'Collect',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
+              TreasureFound(:final treasure) => _TreasureFoundView(
+                  name: treasure.name,
+                  description: treasure.description,
                 ),
             },
             const Spacer(),
@@ -108,6 +74,84 @@ class _TreasureHuntView extends StatelessWidget {
             const SizedBox(height: 16),
           ],
         );
+      },
+    );
+  }
+}
+
+class _TreasureFoundView extends StatelessWidget {
+  const _TreasureFoundView({
+    required this.name,
+    required this.description,
+  });
+
+  final String name;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+        Text(
+          name,
+          style: const TextStyle(fontSize: 18),
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          description,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        const _CollectTreasureButton(),
+      ],
+    );
+  }
+}
+
+class _CollectTreasureButton extends StatelessWidget {
+  const _CollectTreasureButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return BlocBuilder<TreasureHuntCubit, TreasureHuntState>(
+      buildWhen: (previous, current) =>
+          previous is TreasureFound &&
+          current is TreasureFound &&
+          previous.isCollectingTreasure != current.isCollectingTreasure,
+      builder: (context, state) {
+        return switch (state) {
+          TreasureFound(
+            :final isCollectingTreasure,
+            :final treasure,
+          ) =>
+            ElevatedButton.icon(
+              onPressed: () => isCollectingTreasure
+                  ? null
+                  : context
+                      .read<TreasureHuntCubit>()
+                      .collectTreasure(treasure.id),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.primaryColor,
+              ),
+              icon: isCollectingTreasure
+                  ? null
+                  : const Icon(
+                      Icons.inventory_2_rounded,
+                      color: Colors.white,
+                    ),
+              label: isCollectingTreasure
+                  ? const AppButtonCircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : const Text(
+                      'Collect',
+                      style: TextStyle(color: Colors.white),
+                    ),
+            ),
+          _ => const SizedBox.shrink(),
+        };
       },
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,41 +13,69 @@ part 'collected_treasures_state.dart';
 class CollectedTreasuresBloc
     extends Bloc<CollectedTreasuresEvent, CollectedTreasuresState> {
   CollectedTreasuresBloc({
-    required User user,
+    required List<Treasure> collectedTreasures,
+    required List<Treasure> favouriteTreasures,
     required UserRepository userRepository,
   })  : _userRepository = userRepository,
         super(
           CollectedTreasuresState(
-            favouriteTreasures:
-                user.favouriteTreasures.map((e) => e.id).toList(),
+            allCollectedTreasures: {
+              for (final treasure in collectedTreasures) treasure.id: treasure,
+            },
+            favouriteTreasures: favouriteTreasures.map((e) => e.id).toSet(),
           ),
         ) {
-    on<Started>(_onStarted);
+    on<CollectedTreasuresUpdated>(_onCollectedTreasuresUpdated);
+    on<FavouriteTreasuresUpdated>(_onFavouriteTreasuresUpdated);
     on<TreasureFavouriteStatusChanged>(
       _onTreasureFavoriteStatusChanged,
       transformer: concurrent(),
     );
+    _collectedTreasuresSubscription =
+        userRepository.collectedTreasures.listen(_collectedTreasuresChanged);
+    _favouriteTreasuresSubscription =
+        userRepository.favouriteTreasures.listen(_favouriteTreasuresChanged);
   }
 
   final UserRepository _userRepository;
+  late StreamSubscription<List<Treasure>> _collectedTreasuresSubscription;
+  late StreamSubscription<List<Treasure>> _favouriteTreasuresSubscription;
 
-  Future<void> _onStarted(
-    Started event,
-    Emitter<CollectedTreasuresState> emit,
-  ) async {
-    emit(state.copyWith(status: CollectedTreasuresStatus.loading));
-
-    try {
-      final treasures = await _userRepository.fetchAllCollectedTreasures();
-      emit(
-        state.copyWith(
+  void _collectedTreasuresChanged(List<Treasure> treasures) => add(
+        CollectedTreasuresEvent.collectedTreasuresUpdated(
           allCollectedTreasures: treasures,
-          status: CollectedTreasuresStatus.loaded,
         ),
       );
-    } on Exception {
-      emit(state.copyWith(status: CollectedTreasuresStatus.initial));
-    }
+
+  void _favouriteTreasuresChanged(List<Treasure> treasures) => add(
+        FavouriteTreasuresUpdated(
+          favouriteTreasures: treasures.map((e) => e.id).toSet(),
+        ),
+      );
+
+  Future<void> _onCollectedTreasuresUpdated(
+    CollectedTreasuresUpdated event,
+    Emitter<CollectedTreasuresState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        allCollectedTreasures: {
+          for (final treasure in event.allCollectedTreasures)
+            treasure.id: treasure,
+        },
+      ),
+    );
+  }
+
+  Future<void> _onFavouriteTreasuresUpdated(
+    FavouriteTreasuresUpdated event,
+    Emitter<CollectedTreasuresState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        favouriteTreasures: event.favouriteTreasures,
+      ),
+    );
   }
 
   Future<void> _onTreasureFavoriteStatusChanged(
@@ -125,5 +155,12 @@ class CollectedTreasuresBloc
         }
       }
     }
+  }
+
+  @override
+  Future<void> close() {
+    _collectedTreasuresSubscription.cancel();
+    _favouriteTreasuresSubscription.cancel();
+    return super.close();
   }
 }

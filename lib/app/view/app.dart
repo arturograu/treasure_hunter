@@ -9,14 +9,20 @@ import 'package:user_repository/user_repository.dart';
 class App extends StatelessWidget {
   const App({
     required User user,
+    required List<Treasure> userCollectedTreasures,
+    required List<Treasure> userFavouriteTreasures,
     required UserRepository userRepository,
     required TreasuresRepository treasuresRepository,
     super.key,
   })  : _user = user,
+        _userCollectedTreasures = userCollectedTreasures,
+        _userFavouriteTreasures = userFavouriteTreasures,
         _userRepository = userRepository,
         _treasuresRepository = treasuresRepository;
 
   final User _user;
+  final List<Treasure> _userCollectedTreasures;
+  final List<Treasure> _userFavouriteTreasures;
   final UserRepository _userRepository;
   final TreasuresRepository _treasuresRepository;
 
@@ -30,6 +36,8 @@ class App extends StatelessWidget {
       child: BlocProvider(
         create: (_) => AppCubit(
           user: _user,
+          userCollectedTreasures: _userCollectedTreasures,
+          userFavouriteTreasures: _userFavouriteTreasures,
           userRepository: _userRepository,
         ),
         child: const _AppView(),

@@ -5,6 +5,7 @@ import 'package:treasure_hunter_api_client/treasure_hunter_api_client.dart';
 
 abstract class TreasureHunterApiFakerStorageKeys {
   static const userTreasures = '__user_treasures_key__';
+  static const userFavoriteTreasures = '__user_favorite_treasures_key__';
   static const currentUser = '__current_user_key__';
 }
 
@@ -35,13 +36,11 @@ class TreasureHunterApiFaker {
   Future<User> updateUser({
     String? name,
     String? email,
-    List<Treasure>? favouriteTreasures,
   }) async {
     final currentUser = await fetchCurrentUser();
     final updatedUser = currentUser.copyWith(
       name: name ?? currentUser.name,
       email: email ?? currentUser.email,
-      favouriteTreasures: favouriteTreasures ?? currentUser.favouriteTreasures,
     );
 
     await _storage.write(
@@ -52,14 +51,13 @@ class TreasureHunterApiFaker {
     return updatedUser;
   }
 
-  Future<List<Treasure>> addUserTreasure({required Treasure treasure}) async {
-    final currentTreasures = await fetchUserTreasures();
+  Future<List<Treasure>> updateUserTreasures(List<Treasure> treasures) async {
     await _storage.write(
       key: TreasureHunterApiFakerStorageKeys.userTreasures,
-      value: jsonEncode([...currentTreasures, treasure]),
+      value: jsonEncode(treasures),
     );
 
-    return fetchUserTreasures();
+    return treasures;
   }
 
   Future<List<Treasure>> fetchUserTreasures() async {
@@ -75,5 +73,27 @@ class TreasureHunterApiFaker {
         .map((item) => item as Map<String, dynamic>)
         .toList();
     return treasuresJson.map(Treasure.fromJson).toList();
+  }
+
+  Future<List<Treasure>> fetchUserFavoriteTreasures() async {
+    final favoriteTreasures = await _storage.read(
+      key: TreasureHunterApiFakerStorageKeys.userFavoriteTreasures,
+    );
+
+    if (favoriteTreasures == null) {
+      return [];
+    }
+
+    final favoriteTreasuresJson = (jsonDecode(favoriteTreasures) as List)
+        .map((item) => item as Map<String, dynamic>)
+        .toList();
+    return favoriteTreasuresJson.map(Treasure.fromJson).toList();
+  }
+
+  Future<void> updateUserFavoriteTreasures(List<Treasure> treasures) async {
+    await _storage.write(
+      key: TreasureHunterApiFakerStorageKeys.userFavoriteTreasures,
+      value: jsonEncode(treasures),
+    );
   }
 }

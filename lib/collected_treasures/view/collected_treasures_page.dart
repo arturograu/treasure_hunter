@@ -42,9 +42,12 @@ class _CollectedTreasuresState extends State<CollectedTreasures> {
           Expanded(
             child: BlocProvider(
               create: (_) => CollectedTreasuresBloc(
-                user: context.read<AppCubit>().state.user,
+                collectedTreasures:
+                    context.read<AppCubit>().state.userCollectedTreasures,
+                favouriteTreasures:
+                    context.read<AppCubit>().state.userFavouriteTreasures,
                 userRepository: context.read<UserRepository>(),
-              )..add(const CollectedTreasuresEvent.started()),
+              ),
               child: CollectedTreasuresView(selectedList: _selectedType),
             ),
           ),

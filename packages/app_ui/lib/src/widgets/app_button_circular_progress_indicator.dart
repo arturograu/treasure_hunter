@@ -5,7 +5,13 @@ import 'package:flutter/material.dart';
 /// {@endtemplate}
 class AppButtonCircularProgressIndicator extends StatelessWidget {
   /// {@macro app_button_circular_progress_indicator}
-  const AppButtonCircularProgressIndicator({super.key});
+  const AppButtonCircularProgressIndicator({
+    super.key,
+    this.color,
+  });
+
+  /// The color of the progress indicator.
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,7 @@ class AppButtonCircularProgressIndicator extends StatelessWidget {
     return SizedBox.square(
       dimension: 18,
       child: CircularProgressIndicator(
-        color: theme.primaryColor,
+        color: color ?? theme.primaryColor,
       ),
     );
   }

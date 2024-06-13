@@ -23,7 +23,6 @@ mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  List<Treasure> get favouriteTreasures => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,11 +34,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String email,
-      List<Treasure> favouriteTreasures});
+  $Res call({String id, String name, String email});
 }
 
 /// @nodoc
@@ -58,7 +53,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? favouriteTreasures = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,10 +67,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      favouriteTreasures: null == favouriteTreasures
-          ? _value.favouriteTreasures
-          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
-              as List<Treasure>,
     ) as $Val);
   }
 }
@@ -88,11 +78,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String email,
-      List<Treasure> favouriteTreasures});
+  $Res call({String id, String name, String email});
 }
 
 /// @nodoc
@@ -108,7 +94,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? favouriteTreasures = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -123,10 +108,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      favouriteTreasures: null == favouriteTreasures
-          ? _value._favouriteTreasures
-          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
-              as List<Treasure>,
     ));
   }
 }
@@ -134,12 +115,7 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl(
-      {required this.id,
-      required this.name,
-      required this.email,
-      final List<Treasure> favouriteTreasures = const <Treasure>[]})
-      : _favouriteTreasures = favouriteTreasures;
+  const _$UserImpl({required this.id, required this.name, required this.email});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -150,19 +126,10 @@ class _$UserImpl implements _User {
   final String name;
   @override
   final String email;
-  final List<Treasure> _favouriteTreasures;
-  @override
-  @JsonKey()
-  List<Treasure> get favouriteTreasures {
-    if (_favouriteTreasures is EqualUnmodifiableListView)
-      return _favouriteTreasures;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_favouriteTreasures);
-  }
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, favouriteTreasures: $favouriteTreasures)';
+    return 'User(id: $id, name: $name, email: $email)';
   }
 
   @override
@@ -172,15 +139,12 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            const DeepCollectionEquality()
-                .equals(other._favouriteTreasures, _favouriteTreasures));
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email,
-      const DeepCollectionEquality().hash(_favouriteTreasures));
+  int get hashCode => Object.hash(runtimeType, id, name, email);
 
   @JsonKey(ignore: true)
   @override
@@ -200,8 +164,7 @@ abstract class _User implements User {
   const factory _User(
       {required final String id,
       required final String name,
-      required final String email,
-      final List<Treasure> favouriteTreasures}) = _$UserImpl;
+      required final String email}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -211,8 +174,6 @@ abstract class _User implements User {
   String get name;
   @override
   String get email;
-  @override
-  List<Treasure> get favouriteTreasures;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

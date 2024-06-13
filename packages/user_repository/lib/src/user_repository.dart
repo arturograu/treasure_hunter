@@ -8,6 +8,9 @@ import 'package:user_repository/src/models/user/user.dart';
 /// User controller
 typedef UserController = StreamController<User>;
 
+/// Treasures controller
+typedef TreasuresController = StreamController<List<Treasure>>;
+
 class UserRepository {
   UserRepository({
     required api_client.TreasureHunterApiClient apiClient,
@@ -15,15 +18,33 @@ class UserRepository {
     _apiClient.fetchCurrentUser().then((user) {
       _userController.add(User.fromApi(user));
     });
+    _apiClient.fetchUserTreasures().then((userTreasures) {
+      _collectedTreasuresController
+          .add(userTreasures.map(Treasure.fromApi).toList());
+    });
+    _apiClient.fetchUserFavouriteTreasures().then((userFavouriteTreasures) {
+      _favouriteTreasuresController
+          .add(userFavouriteTreasures.map(Treasure.fromApi).toList());
+    });
   }
 
   final api_client.TreasureHunterApiClient _apiClient;
 
-  /// Stream of [api_client.User] which will emit the current user when the
+  /// Stream of [User] which will emit the current user when the
   /// user changes in the data layer.
   Stream<User> get user => _userController.stream;
 
+  /// Stream of [Treasure]'s collected by the user.
+  Stream<List<Treasure>> get collectedTreasures =>
+      _collectedTreasuresController.stream;
+
+  /// Stream of [Treasure]'s favourited by the user.
+  Stream<List<Treasure>> get favouriteTreasures =>
+      _favouriteTreasuresController.stream;
+
   final _userController = UserController.broadcast();
+  final _collectedTreasuresController = TreasuresController.broadcast();
+  final _favouriteTreasuresController = TreasuresController.broadcast();
 
   /// Change the user's name.
   ///

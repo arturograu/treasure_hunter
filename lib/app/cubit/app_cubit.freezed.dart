@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AppState {
   User get user => throw _privateConstructorUsedError;
+  List<Treasure> get userCollectedTreasures =>
+      throw _privateConstructorUsedError;
+  List<Treasure> get userFavouriteTreasures =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -28,7 +32,10 @@ abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({User user});
+  $Res call(
+      {User user,
+      List<Treasure> userCollectedTreasures,
+      List<Treasure> userFavouriteTreasures});
 
   $UserCopyWith<$Res> get user;
 }
@@ -47,12 +54,22 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @override
   $Res call({
     Object? user = null,
+    Object? userCollectedTreasures = null,
+    Object? userFavouriteTreasures = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      userCollectedTreasures: null == userCollectedTreasures
+          ? _value.userCollectedTreasures
+          : userCollectedTreasures // ignore: cast_nullable_to_non_nullable
+              as List<Treasure>,
+      userFavouriteTreasures: null == userFavouriteTreasures
+          ? _value.userFavouriteTreasures
+          : userFavouriteTreasures // ignore: cast_nullable_to_non_nullable
+              as List<Treasure>,
     ) as $Val);
   }
 
@@ -73,7 +90,10 @@ abstract class _$$AppStateImplCopyWith<$Res>
       __$$AppStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User user});
+  $Res call(
+      {User user,
+      List<Treasure> userCollectedTreasures,
+      List<Treasure> userFavouriteTreasures});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -91,12 +111,22 @@ class __$$AppStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? userCollectedTreasures = null,
+    Object? userFavouriteTreasures = null,
   }) {
     return _then(_$AppStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      userCollectedTreasures: null == userCollectedTreasures
+          ? _value._userCollectedTreasures
+          : userCollectedTreasures // ignore: cast_nullable_to_non_nullable
+              as List<Treasure>,
+      userFavouriteTreasures: null == userFavouriteTreasures
+          ? _value._userFavouriteTreasures
+          : userFavouriteTreasures // ignore: cast_nullable_to_non_nullable
+              as List<Treasure>,
     ));
   }
 }
@@ -104,14 +134,36 @@ class __$$AppStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppStateImpl implements _AppState {
-  const _$AppStateImpl({required this.user});
+  const _$AppStateImpl(
+      {required this.user,
+      required final List<Treasure> userCollectedTreasures,
+      required final List<Treasure> userFavouriteTreasures})
+      : _userCollectedTreasures = userCollectedTreasures,
+        _userFavouriteTreasures = userFavouriteTreasures;
 
   @override
   final User user;
+  final List<Treasure> _userCollectedTreasures;
+  @override
+  List<Treasure> get userCollectedTreasures {
+    if (_userCollectedTreasures is EqualUnmodifiableListView)
+      return _userCollectedTreasures;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userCollectedTreasures);
+  }
+
+  final List<Treasure> _userFavouriteTreasures;
+  @override
+  List<Treasure> get userFavouriteTreasures {
+    if (_userFavouriteTreasures is EqualUnmodifiableListView)
+      return _userFavouriteTreasures;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userFavouriteTreasures);
+  }
 
   @override
   String toString() {
-    return 'AppState(user: $user)';
+    return 'AppState(user: $user, userCollectedTreasures: $userCollectedTreasures, userFavouriteTreasures: $userFavouriteTreasures)';
   }
 
   @override
@@ -119,11 +171,19 @@ class _$AppStateImpl implements _AppState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppStateImpl &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(
+                other._userCollectedTreasures, _userCollectedTreasures) &&
+            const DeepCollectionEquality().equals(
+                other._userFavouriteTreasures, _userFavouriteTreasures));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      const DeepCollectionEquality().hash(_userCollectedTreasures),
+      const DeepCollectionEquality().hash(_userFavouriteTreasures));
 
   @JsonKey(ignore: true)
   @override
@@ -133,10 +193,17 @@ class _$AppStateImpl implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  const factory _AppState({required final User user}) = _$AppStateImpl;
+  const factory _AppState(
+      {required final User user,
+      required final List<Treasure> userCollectedTreasures,
+      required final List<Treasure> userFavouriteTreasures}) = _$AppStateImpl;
 
   @override
   User get user;
+  @override
+  List<Treasure> get userCollectedTreasures;
+  @override
+  List<Treasure> get userFavouriteTreasures;
   @override
   @JsonKey(ignore: true)
   _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>

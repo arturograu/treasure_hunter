@@ -53,15 +53,16 @@ class _LoadedView extends StatelessWidget {
   });
 
   final ListType selectedList;
-  final List<Treasure> allCollectedTreasures;
-  final List<String> favouriteTreasures;
+  final Map<String, Treasure> allCollectedTreasures;
+  final Set<String> favouriteTreasures;
 
   @override
   Widget build(BuildContext context) => switch (selectedList) {
-        ListType.all =>
-          CollectedTreasuresList(treasures: allCollectedTreasures),
+        ListType.all => CollectedTreasuresList(
+            treasures: allCollectedTreasures.values.toList(),
+          ),
         ListType.favourites => CollectedTreasuresList(
-            treasures: allCollectedTreasures
+            treasures: allCollectedTreasures.values
                 .where((treasure) => favouriteTreasures.contains(treasure.id))
                 .toList(),
           )

@@ -41,7 +41,7 @@ class TreasureHuntCubit extends Cubit<TreasureHuntState> {
 
     try {
       await _userRepository.collectTreasure(id);
-      emit((state as TreasureFound).copyWith(isCollectingTreasure: false));
+      emit(const TreasureHuntState.initial());
     } on Exception {
       emit((state as TreasureFound).copyWith(isCollectingTreasure: false));
     }

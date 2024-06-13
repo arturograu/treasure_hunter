@@ -20,6 +20,8 @@ void main() {
 
       return App(
         user: await userRepository.user.first,
+        userCollectedTreasures: await userRepository.collectedTreasures.first,
+        userFavouriteTreasures: await userRepository.favouriteTreasures.first,
         userRepository: userRepository,
         treasuresRepository: treasuresRepository,
       );

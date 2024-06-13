@@ -18,42 +18,59 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CollectedTreasuresEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function(String id) treasureFavouriteStatusChanged,
+    required TResult Function(List<Treasure> allCollectedTreasures)
+        collectedTreasuresUpdated,
+    required TResult Function(Set<String> favouriteTreasures)
+        favouriteTreasuresUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
     TResult? Function(String id)? treasureFavouriteStatusChanged,
+    TResult? Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult? Function(Set<String> favouriteTreasures)?
+        favouriteTreasuresUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function(String id)? treasureFavouriteStatusChanged,
+    TResult Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult Function(Set<String> favouriteTreasures)? favouriteTreasuresUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Started value) started,
     required TResult Function(TreasureFavouriteStatusChanged value)
         treasureFavouriteStatusChanged,
+    required TResult Function(CollectedTreasuresUpdated value)
+        collectedTreasuresUpdated,
+    required TResult Function(FavouriteTreasuresUpdated value)
+        favouriteTreasuresUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Started value)? started,
     TResult? Function(TreasureFavouriteStatusChanged value)?
         treasureFavouriteStatusChanged,
+    TResult? Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult? Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Started value)? started,
     TResult Function(TreasureFavouriteStatusChanged value)?
         treasureFavouriteStatusChanged,
+    TResult Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,111 +93,6 @@ class _$CollectedTreasuresEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$CollectedTreasuresEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$StartedImpl implements Started {
-  const _$StartedImpl();
-
-  @override
-  String toString() {
-    return 'CollectedTreasuresEvent.started()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String id) treasureFavouriteStatusChanged,
-  }) {
-    return started();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String id)? treasureFavouriteStatusChanged,
-  }) {
-    return started?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String id)? treasureFavouriteStatusChanged,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Started value) started,
-    required TResult Function(TreasureFavouriteStatusChanged value)
-        treasureFavouriteStatusChanged,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Started value)? started,
-    TResult? Function(TreasureFavouriteStatusChanged value)?
-        treasureFavouriteStatusChanged,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Started value)? started,
-    TResult Function(TreasureFavouriteStatusChanged value)?
-        treasureFavouriteStatusChanged,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Started implements CollectedTreasuresEvent {
-  const factory Started() = _$StartedImpl;
 }
 
 /// @nodoc
@@ -209,7 +121,7 @@ class __$$TreasureFavouriteStatusChangedImplCopyWithImpl<$Res>
     Object? id = null,
   }) {
     return _then(_$TreasureFavouriteStatusChangedImpl(
-      id: null == id
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
@@ -221,7 +133,7 @@ class __$$TreasureFavouriteStatusChangedImplCopyWithImpl<$Res>
 
 class _$TreasureFavouriteStatusChangedImpl
     implements TreasureFavouriteStatusChanged {
-  const _$TreasureFavouriteStatusChangedImpl({required this.id});
+  const _$TreasureFavouriteStatusChangedImpl(this.id);
 
   @override
   final String id;
@@ -253,8 +165,11 @@ class _$TreasureFavouriteStatusChangedImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function(String id) treasureFavouriteStatusChanged,
+    required TResult Function(List<Treasure> allCollectedTreasures)
+        collectedTreasuresUpdated,
+    required TResult Function(Set<String> favouriteTreasures)
+        favouriteTreasuresUpdated,
   }) {
     return treasureFavouriteStatusChanged(id);
   }
@@ -262,8 +177,11 @@ class _$TreasureFavouriteStatusChangedImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
     TResult? Function(String id)? treasureFavouriteStatusChanged,
+    TResult? Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult? Function(Set<String> favouriteTreasures)?
+        favouriteTreasuresUpdated,
   }) {
     return treasureFavouriteStatusChanged?.call(id);
   }
@@ -271,8 +189,10 @@ class _$TreasureFavouriteStatusChangedImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function(String id)? treasureFavouriteStatusChanged,
+    TResult Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult Function(Set<String> favouriteTreasures)? favouriteTreasuresUpdated,
     required TResult orElse(),
   }) {
     if (treasureFavouriteStatusChanged != null) {
@@ -284,9 +204,12 @@ class _$TreasureFavouriteStatusChangedImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Started value) started,
     required TResult Function(TreasureFavouriteStatusChanged value)
         treasureFavouriteStatusChanged,
+    required TResult Function(CollectedTreasuresUpdated value)
+        collectedTreasuresUpdated,
+    required TResult Function(FavouriteTreasuresUpdated value)
+        favouriteTreasuresUpdated,
   }) {
     return treasureFavouriteStatusChanged(this);
   }
@@ -294,9 +217,12 @@ class _$TreasureFavouriteStatusChangedImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Started value)? started,
     TResult? Function(TreasureFavouriteStatusChanged value)?
         treasureFavouriteStatusChanged,
+    TResult? Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult? Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
   }) {
     return treasureFavouriteStatusChanged?.call(this);
   }
@@ -304,9 +230,12 @@ class _$TreasureFavouriteStatusChangedImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Started value)? started,
     TResult Function(TreasureFavouriteStatusChanged value)?
         treasureFavouriteStatusChanged,
+    TResult Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
     required TResult orElse(),
   }) {
     if (treasureFavouriteStatusChanged != null) {
@@ -318,7 +247,7 @@ class _$TreasureFavouriteStatusChangedImpl
 
 abstract class TreasureFavouriteStatusChanged
     implements CollectedTreasuresEvent {
-  const factory TreasureFavouriteStatusChanged({required final String id}) =
+  const factory TreasureFavouriteStatusChanged(final String id) =
       _$TreasureFavouriteStatusChangedImpl;
 
   String get id;
@@ -329,10 +258,348 @@ abstract class TreasureFavouriteStatusChanged
 }
 
 /// @nodoc
+abstract class _$$CollectedTreasuresUpdatedImplCopyWith<$Res> {
+  factory _$$CollectedTreasuresUpdatedImplCopyWith(
+          _$CollectedTreasuresUpdatedImpl value,
+          $Res Function(_$CollectedTreasuresUpdatedImpl) then) =
+      __$$CollectedTreasuresUpdatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Treasure> allCollectedTreasures});
+}
+
+/// @nodoc
+class __$$CollectedTreasuresUpdatedImplCopyWithImpl<$Res>
+    extends _$CollectedTreasuresEventCopyWithImpl<$Res,
+        _$CollectedTreasuresUpdatedImpl>
+    implements _$$CollectedTreasuresUpdatedImplCopyWith<$Res> {
+  __$$CollectedTreasuresUpdatedImplCopyWithImpl(
+      _$CollectedTreasuresUpdatedImpl _value,
+      $Res Function(_$CollectedTreasuresUpdatedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? allCollectedTreasures = null,
+  }) {
+    return _then(_$CollectedTreasuresUpdatedImpl(
+      allCollectedTreasures: null == allCollectedTreasures
+          ? _value._allCollectedTreasures
+          : allCollectedTreasures // ignore: cast_nullable_to_non_nullable
+              as List<Treasure>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CollectedTreasuresUpdatedImpl implements CollectedTreasuresUpdated {
+  const _$CollectedTreasuresUpdatedImpl(
+      {required final List<Treasure> allCollectedTreasures})
+      : _allCollectedTreasures = allCollectedTreasures;
+
+  final List<Treasure> _allCollectedTreasures;
+  @override
+  List<Treasure> get allCollectedTreasures {
+    if (_allCollectedTreasures is EqualUnmodifiableListView)
+      return _allCollectedTreasures;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allCollectedTreasures);
+  }
+
+  @override
+  String toString() {
+    return 'CollectedTreasuresEvent.collectedTreasuresUpdated(allCollectedTreasures: $allCollectedTreasures)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CollectedTreasuresUpdatedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._allCollectedTreasures, _allCollectedTreasures));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_allCollectedTreasures));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CollectedTreasuresUpdatedImplCopyWith<_$CollectedTreasuresUpdatedImpl>
+      get copyWith => __$$CollectedTreasuresUpdatedImplCopyWithImpl<
+          _$CollectedTreasuresUpdatedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) treasureFavouriteStatusChanged,
+    required TResult Function(List<Treasure> allCollectedTreasures)
+        collectedTreasuresUpdated,
+    required TResult Function(Set<String> favouriteTreasures)
+        favouriteTreasuresUpdated,
+  }) {
+    return collectedTreasuresUpdated(allCollectedTreasures);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? treasureFavouriteStatusChanged,
+    TResult? Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult? Function(Set<String> favouriteTreasures)?
+        favouriteTreasuresUpdated,
+  }) {
+    return collectedTreasuresUpdated?.call(allCollectedTreasures);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? treasureFavouriteStatusChanged,
+    TResult Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult Function(Set<String> favouriteTreasures)? favouriteTreasuresUpdated,
+    required TResult orElse(),
+  }) {
+    if (collectedTreasuresUpdated != null) {
+      return collectedTreasuresUpdated(allCollectedTreasures);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TreasureFavouriteStatusChanged value)
+        treasureFavouriteStatusChanged,
+    required TResult Function(CollectedTreasuresUpdated value)
+        collectedTreasuresUpdated,
+    required TResult Function(FavouriteTreasuresUpdated value)
+        favouriteTreasuresUpdated,
+  }) {
+    return collectedTreasuresUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TreasureFavouriteStatusChanged value)?
+        treasureFavouriteStatusChanged,
+    TResult? Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult? Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
+  }) {
+    return collectedTreasuresUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TreasureFavouriteStatusChanged value)?
+        treasureFavouriteStatusChanged,
+    TResult Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
+    required TResult orElse(),
+  }) {
+    if (collectedTreasuresUpdated != null) {
+      return collectedTreasuresUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CollectedTreasuresUpdated implements CollectedTreasuresEvent {
+  const factory CollectedTreasuresUpdated(
+          {required final List<Treasure> allCollectedTreasures}) =
+      _$CollectedTreasuresUpdatedImpl;
+
+  List<Treasure> get allCollectedTreasures;
+  @JsonKey(ignore: true)
+  _$$CollectedTreasuresUpdatedImplCopyWith<_$CollectedTreasuresUpdatedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FavouriteTreasuresUpdatedImplCopyWith<$Res> {
+  factory _$$FavouriteTreasuresUpdatedImplCopyWith(
+          _$FavouriteTreasuresUpdatedImpl value,
+          $Res Function(_$FavouriteTreasuresUpdatedImpl) then) =
+      __$$FavouriteTreasuresUpdatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Set<String> favouriteTreasures});
+}
+
+/// @nodoc
+class __$$FavouriteTreasuresUpdatedImplCopyWithImpl<$Res>
+    extends _$CollectedTreasuresEventCopyWithImpl<$Res,
+        _$FavouriteTreasuresUpdatedImpl>
+    implements _$$FavouriteTreasuresUpdatedImplCopyWith<$Res> {
+  __$$FavouriteTreasuresUpdatedImplCopyWithImpl(
+      _$FavouriteTreasuresUpdatedImpl _value,
+      $Res Function(_$FavouriteTreasuresUpdatedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? favouriteTreasures = null,
+  }) {
+    return _then(_$FavouriteTreasuresUpdatedImpl(
+      favouriteTreasures: null == favouriteTreasures
+          ? _value._favouriteTreasures
+          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
+              as Set<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FavouriteTreasuresUpdatedImpl implements FavouriteTreasuresUpdated {
+  const _$FavouriteTreasuresUpdatedImpl(
+      {required final Set<String> favouriteTreasures})
+      : _favouriteTreasures = favouriteTreasures;
+
+  final Set<String> _favouriteTreasures;
+  @override
+  Set<String> get favouriteTreasures {
+    if (_favouriteTreasures is EqualUnmodifiableSetView)
+      return _favouriteTreasures;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_favouriteTreasures);
+  }
+
+  @override
+  String toString() {
+    return 'CollectedTreasuresEvent.favouriteTreasuresUpdated(favouriteTreasures: $favouriteTreasures)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FavouriteTreasuresUpdatedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._favouriteTreasures, _favouriteTreasures));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_favouriteTreasures));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FavouriteTreasuresUpdatedImplCopyWith<_$FavouriteTreasuresUpdatedImpl>
+      get copyWith => __$$FavouriteTreasuresUpdatedImplCopyWithImpl<
+          _$FavouriteTreasuresUpdatedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) treasureFavouriteStatusChanged,
+    required TResult Function(List<Treasure> allCollectedTreasures)
+        collectedTreasuresUpdated,
+    required TResult Function(Set<String> favouriteTreasures)
+        favouriteTreasuresUpdated,
+  }) {
+    return favouriteTreasuresUpdated(favouriteTreasures);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? treasureFavouriteStatusChanged,
+    TResult? Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult? Function(Set<String> favouriteTreasures)?
+        favouriteTreasuresUpdated,
+  }) {
+    return favouriteTreasuresUpdated?.call(favouriteTreasures);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? treasureFavouriteStatusChanged,
+    TResult Function(List<Treasure> allCollectedTreasures)?
+        collectedTreasuresUpdated,
+    TResult Function(Set<String> favouriteTreasures)? favouriteTreasuresUpdated,
+    required TResult orElse(),
+  }) {
+    if (favouriteTreasuresUpdated != null) {
+      return favouriteTreasuresUpdated(favouriteTreasures);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TreasureFavouriteStatusChanged value)
+        treasureFavouriteStatusChanged,
+    required TResult Function(CollectedTreasuresUpdated value)
+        collectedTreasuresUpdated,
+    required TResult Function(FavouriteTreasuresUpdated value)
+        favouriteTreasuresUpdated,
+  }) {
+    return favouriteTreasuresUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TreasureFavouriteStatusChanged value)?
+        treasureFavouriteStatusChanged,
+    TResult? Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult? Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
+  }) {
+    return favouriteTreasuresUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TreasureFavouriteStatusChanged value)?
+        treasureFavouriteStatusChanged,
+    TResult Function(CollectedTreasuresUpdated value)?
+        collectedTreasuresUpdated,
+    TResult Function(FavouriteTreasuresUpdated value)?
+        favouriteTreasuresUpdated,
+    required TResult orElse(),
+  }) {
+    if (favouriteTreasuresUpdated != null) {
+      return favouriteTreasuresUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FavouriteTreasuresUpdated implements CollectedTreasuresEvent {
+  const factory FavouriteTreasuresUpdated(
+          {required final Set<String> favouriteTreasures}) =
+      _$FavouriteTreasuresUpdatedImpl;
+
+  Set<String> get favouriteTreasures;
+  @JsonKey(ignore: true)
+  _$$FavouriteTreasuresUpdatedImplCopyWith<_$FavouriteTreasuresUpdatedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CollectedTreasuresState {
-  List<String> get favouriteTreasures => throw _privateConstructorUsedError;
-  List<Treasure> get allCollectedTreasures =>
+  Map<String, Treasure> get allCollectedTreasures =>
       throw _privateConstructorUsedError;
+  Set<String> get favouriteTreasures => throw _privateConstructorUsedError;
   Set<String> get pendingFavouriteDeletions =>
       throw _privateConstructorUsedError;
   Set<String> get pendingFavouriteAdditions =>
@@ -351,8 +618,8 @@ abstract class $CollectedTreasuresStateCopyWith<$Res> {
       _$CollectedTreasuresStateCopyWithImpl<$Res, CollectedTreasuresState>;
   @useResult
   $Res call(
-      {List<String> favouriteTreasures,
-      List<Treasure> allCollectedTreasures,
+      {Map<String, Treasure> allCollectedTreasures,
+      Set<String> favouriteTreasures,
       Set<String> pendingFavouriteDeletions,
       Set<String> pendingFavouriteAdditions,
       CollectedTreasuresStatus status});
@@ -372,21 +639,21 @@ class _$CollectedTreasuresStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? favouriteTreasures = null,
     Object? allCollectedTreasures = null,
+    Object? favouriteTreasures = null,
     Object? pendingFavouriteDeletions = null,
     Object? pendingFavouriteAdditions = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
-      favouriteTreasures: null == favouriteTreasures
-          ? _value.favouriteTreasures
-          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       allCollectedTreasures: null == allCollectedTreasures
           ? _value.allCollectedTreasures
           : allCollectedTreasures // ignore: cast_nullable_to_non_nullable
-              as List<Treasure>,
+              as Map<String, Treasure>,
+      favouriteTreasures: null == favouriteTreasures
+          ? _value.favouriteTreasures
+          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
+              as Set<String>,
       pendingFavouriteDeletions: null == pendingFavouriteDeletions
           ? _value.pendingFavouriteDeletions
           : pendingFavouriteDeletions // ignore: cast_nullable_to_non_nullable
@@ -413,8 +680,8 @@ abstract class _$$CollectedTreasuresStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<String> favouriteTreasures,
-      List<Treasure> allCollectedTreasures,
+      {Map<String, Treasure> allCollectedTreasures,
+      Set<String> favouriteTreasures,
       Set<String> pendingFavouriteDeletions,
       Set<String> pendingFavouriteAdditions,
       CollectedTreasuresStatus status});
@@ -433,21 +700,21 @@ class __$$CollectedTreasuresStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? favouriteTreasures = null,
     Object? allCollectedTreasures = null,
+    Object? favouriteTreasures = null,
     Object? pendingFavouriteDeletions = null,
     Object? pendingFavouriteAdditions = null,
     Object? status = null,
   }) {
     return _then(_$CollectedTreasuresStateImpl(
-      favouriteTreasures: null == favouriteTreasures
-          ? _value._favouriteTreasures
-          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       allCollectedTreasures: null == allCollectedTreasures
           ? _value._allCollectedTreasures
           : allCollectedTreasures // ignore: cast_nullable_to_non_nullable
-              as List<Treasure>,
+              as Map<String, Treasure>,
+      favouriteTreasures: null == favouriteTreasures
+          ? _value._favouriteTreasures
+          : favouriteTreasures // ignore: cast_nullable_to_non_nullable
+              as Set<String>,
       pendingFavouriteDeletions: null == pendingFavouriteDeletions
           ? _value._pendingFavouriteDeletions
           : pendingFavouriteDeletions // ignore: cast_nullable_to_non_nullable
@@ -468,33 +735,32 @@ class __$$CollectedTreasuresStateImplCopyWithImpl<$Res>
 
 class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
   const _$CollectedTreasuresStateImpl(
-      {required final List<String> favouriteTreasures,
-      final List<Treasure> allCollectedTreasures = const <Treasure>[],
+      {required final Map<String, Treasure> allCollectedTreasures,
+      required final Set<String> favouriteTreasures,
       final Set<String> pendingFavouriteDeletions = const <String>{},
       final Set<String> pendingFavouriteAdditions = const <String>{},
       this.status = CollectedTreasuresStatus.initial})
-      : _favouriteTreasures = favouriteTreasures,
-        _allCollectedTreasures = allCollectedTreasures,
+      : _allCollectedTreasures = allCollectedTreasures,
+        _favouriteTreasures = favouriteTreasures,
         _pendingFavouriteDeletions = pendingFavouriteDeletions,
         _pendingFavouriteAdditions = pendingFavouriteAdditions;
 
-  final List<String> _favouriteTreasures;
+  final Map<String, Treasure> _allCollectedTreasures;
   @override
-  List<String> get favouriteTreasures {
-    if (_favouriteTreasures is EqualUnmodifiableListView)
-      return _favouriteTreasures;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_favouriteTreasures);
-  }
-
-  final List<Treasure> _allCollectedTreasures;
-  @override
-  @JsonKey()
-  List<Treasure> get allCollectedTreasures {
-    if (_allCollectedTreasures is EqualUnmodifiableListView)
+  Map<String, Treasure> get allCollectedTreasures {
+    if (_allCollectedTreasures is EqualUnmodifiableMapView)
       return _allCollectedTreasures;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_allCollectedTreasures);
+    return EqualUnmodifiableMapView(_allCollectedTreasures);
+  }
+
+  final Set<String> _favouriteTreasures;
+  @override
+  Set<String> get favouriteTreasures {
+    if (_favouriteTreasures is EqualUnmodifiableSetView)
+      return _favouriteTreasures;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_favouriteTreasures);
   }
 
   final Set<String> _pendingFavouriteDeletions;
@@ -523,7 +789,7 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
 
   @override
   String toString() {
-    return 'CollectedTreasuresState(favouriteTreasures: $favouriteTreasures, allCollectedTreasures: $allCollectedTreasures, pendingFavouriteDeletions: $pendingFavouriteDeletions, pendingFavouriteAdditions: $pendingFavouriteAdditions, status: $status)';
+    return 'CollectedTreasuresState(allCollectedTreasures: $allCollectedTreasures, favouriteTreasures: $favouriteTreasures, pendingFavouriteDeletions: $pendingFavouriteDeletions, pendingFavouriteAdditions: $pendingFavouriteAdditions, status: $status)';
   }
 
   @override
@@ -532,9 +798,9 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
         (other.runtimeType == runtimeType &&
             other is _$CollectedTreasuresStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._favouriteTreasures, _favouriteTreasures) &&
-            const DeepCollectionEquality()
                 .equals(other._allCollectedTreasures, _allCollectedTreasures) &&
+            const DeepCollectionEquality()
+                .equals(other._favouriteTreasures, _favouriteTreasures) &&
             const DeepCollectionEquality().equals(
                 other._pendingFavouriteDeletions, _pendingFavouriteDeletions) &&
             const DeepCollectionEquality().equals(
@@ -545,8 +811,8 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_favouriteTreasures),
       const DeepCollectionEquality().hash(_allCollectedTreasures),
+      const DeepCollectionEquality().hash(_favouriteTreasures),
       const DeepCollectionEquality().hash(_pendingFavouriteDeletions),
       const DeepCollectionEquality().hash(_pendingFavouriteAdditions),
       status);
@@ -561,16 +827,16 @@ class _$CollectedTreasuresStateImpl implements _CollectedTreasuresState {
 
 abstract class _CollectedTreasuresState implements CollectedTreasuresState {
   const factory _CollectedTreasuresState(
-      {required final List<String> favouriteTreasures,
-      final List<Treasure> allCollectedTreasures,
+      {required final Map<String, Treasure> allCollectedTreasures,
+      required final Set<String> favouriteTreasures,
       final Set<String> pendingFavouriteDeletions,
       final Set<String> pendingFavouriteAdditions,
       final CollectedTreasuresStatus status}) = _$CollectedTreasuresStateImpl;
 
   @override
-  List<String> get favouriteTreasures;
+  Map<String, Treasure> get allCollectedTreasures;
   @override
-  List<Treasure> get allCollectedTreasures;
+  Set<String> get favouriteTreasures;
   @override
   Set<String> get pendingFavouriteDeletions;
   @override

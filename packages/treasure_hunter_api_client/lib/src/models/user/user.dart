@@ -10,7 +10,6 @@ class User with _$User {
     required String id,
     required String name,
     required String email,
-    @Default(<Treasure>[]) List<Treasure> favouriteTreasures,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

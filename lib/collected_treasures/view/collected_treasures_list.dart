@@ -1,4 +1,7 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:treasure_hunter/collected_treasures/collected_treasures.dart';
 import 'package:treasures_repository/treasures_repository.dart';
 
 class CollectedTreasuresList extends StatelessWidget {
@@ -20,46 +23,57 @@ class CollectedTreasuresList extends StatelessWidget {
       ),
       itemBuilder: (context, index) => _Item(
         key: Key('treasuresList_tile_$index'),
-        title: Text(_treasures[index].name),
-        subtitle: Text(_treasures[index].description),
+        id: _treasures[index].id,
       ),
     );
   }
 }
 
-class _Item extends StatefulWidget {
+class _Item extends StatelessWidget {
   const _Item({
-    required this.title,
-    required this.subtitle,
+    required this.id,
     super.key,
   });
 
-  final Widget title;
-  final Widget subtitle;
-
-  @override
-  State<_Item> createState() => __ItemState();
-}
-
-class __ItemState extends State<_Item> {
-  bool _isFavorite = false;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: widget.title,
-      subtitle: widget.subtitle,
-      leading: IconButton(
-        icon: Icon(
-          _isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: _isFavorite ? Colors.red : null,
-        ),
-        onPressed: () {
-          setState(() {
-            _isFavorite = !_isFavorite;
-          });
-        },
-      ),
+    return BlocBuilder<CollectedTreasuresBloc, CollectedTreasuresState>(
+      buildWhen: (previous, current) =>
+          previous.pendingFavouriteAdditions.contains(id) !=
+              current.pendingFavouriteAdditions.contains(id) ||
+          previous.pendingFavouriteDeletions.contains(id) !=
+              current.pendingFavouriteDeletions.contains(id),
+      builder: (context, state) {
+        final item = state.allCollectedTreasures[id];
+
+        if (item == null) {
+          return const Text('Treasure id not found');
+        }
+
+        final isFavorite = state.favouriteTreasures.contains(id);
+        final isLoading = state.pendingFavouriteAdditions.contains(id) ||
+            state.pendingFavouriteDeletions.contains(id);
+
+        return ListTile(
+          title: Text(item.name),
+          subtitle: Text(item.description),
+          trailing: isLoading
+              ? const AppButtonCircularProgressIndicator()
+              : IconButton(
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavorite ? Colors.red : null,
+                  ),
+                  onPressed: () => context.read<CollectedTreasuresBloc>().add(
+                        CollectedTreasuresEvent.treasureFavouriteStatusChanged(
+                          id,
+                        ),
+                      ),
+                ),
+        );
+      },
     );
   }
 }

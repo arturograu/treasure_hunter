@@ -11,14 +11,11 @@ abstract class User with _$User {
     required String id,
     required String name,
     required String email,
-    @Default(<Treasure>[]) List<Treasure> favouriteTreasures,
   }) = _User;
 
   factory User.fromApi(api_client.User userApi) => User(
         id: userApi.id,
         name: userApi.name,
         email: userApi.email,
-        favouriteTreasures:
-            userApi.favouriteTreasures.map(Treasure.fromApi).toList(),
       );
 }
