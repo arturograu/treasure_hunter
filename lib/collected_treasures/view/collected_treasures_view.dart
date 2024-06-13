@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:treasure_hunter/collected_treasures/collected_treasures.dart';
 
-class CollectedTreasuresView extends StatefulWidget {
+class CollectedTreasuresView extends StatelessWidget {
   const CollectedTreasuresView({
     required this.selectedListController,
     super.key,
@@ -11,35 +11,23 @@ class CollectedTreasuresView extends StatefulWidget {
   final ValueNotifier<ListType> selectedListController;
 
   @override
-  State<CollectedTreasuresView> createState() => _CollectedTreasuresViewState();
-}
-
-class _CollectedTreasuresViewState extends State<CollectedTreasuresView> {
-  ListType _selectedType = ListType.all;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.selectedListController.addListener(() {
-      setState(() {
-        _selectedType = widget.selectedListController.value;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Offstage(
-          offstage: _selectedType != ListType.all,
-          child: const _AllTreasuresList(),
-        ),
-        Offstage(
-          offstage: _selectedType != ListType.favourites,
-          child: const _FavouritesList(),
-        ),
-      ],
+    return ValueListenableBuilder(
+      valueListenable: selectedListController,
+      builder: (context, selectedType, widget) {
+        return Stack(
+          children: [
+            Offstage(
+              offstage: selectedType != ListType.all,
+              child: const _AllTreasuresList(),
+            ),
+            Offstage(
+              offstage: selectedType != ListType.favourites,
+              child: const _FavouritesList(),
+            ),
+          ],
+        );
+      },
     );
   }
 }

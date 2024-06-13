@@ -21,13 +21,19 @@ class CollectedTreasuresList extends StatelessWidget {
         height: 1,
         color: Colors.grey.withOpacity(0.5),
       ),
-      itemBuilder: (_, index) => _Item(_treasures[index].id),
+      itemBuilder: (_, index) => _Item(
+        key: Key('treasuresList_${key}_tile_${_treasures[index].id}'),
+        id: _treasures[index].id,
+      ),
     );
   }
 }
 
 class _Item extends StatelessWidget {
-  const _Item(this.id);
+  const _Item({
+    required this.id,
+    super.key,
+  });
 
   final String id;
 
@@ -55,7 +61,6 @@ class _Item extends StatelessWidget {
             state.pendingFavouriteDeletions.contains(id);
 
         return ListTile(
-          key: Key('treasuresList_tile_${item.id}'),
           title: Text(item.name),
           subtitle: Text(item.description),
           trailing: IconButton(
