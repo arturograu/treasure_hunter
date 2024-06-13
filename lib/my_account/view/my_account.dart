@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:treasure_hunter/l10n/l10n.dart';
+import 'package:treasure_hunter/my_account/my_account.dart';
 
 class MyAccount extends StatelessWidget {
   const MyAccount({super.key});
@@ -13,8 +14,9 @@ class MyAccount extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.myAccountPageTitle),
       ),
-      body: const Center(
-        child: Text('My Account Page'),
+      body: const Padding(
+        padding: EdgeInsets.all(16),
+        child: UserForm(),
       ),
     );
   }
