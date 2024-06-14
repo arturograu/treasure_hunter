@@ -32,10 +32,14 @@ class TreasureHunterApiClient {
     // fake a delay of 1-3 seconds
     await Future<void>.delayed(Duration(seconds: Random().nextInt(3) + 1));
 
-    return _treasureHunterApiFaker.updateUser(
-      name: name,
-      email: email,
+    final currentUser = await fetchCurrentUser();
+    final updatedUser = currentUser.copyWith(
+      name: name ?? currentUser.name,
+      email: email ?? currentUser.email,
     );
+
+    await _treasureHunterApiFaker.updateUser(updatedUser);
+    return fetchCurrentUser();
   }
 
   /// Fetches the user's treasures.

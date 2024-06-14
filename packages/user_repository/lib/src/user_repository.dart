@@ -55,19 +55,14 @@ class UserRepository {
   final _collectedTreasuresController = BehaviorSubject<List<Treasure>>();
   final _favouriteTreasuresController = BehaviorSubject<List<Treasure>>();
 
-  /// Change the user's name.
+  /// Update the user's information.
   ///
-  /// [name] - The new name.
-  Future<void> changeName(String name) async {
-    final user = await _apiClient.updateUser(name: name);
-    _userController.add(User.fromApi(user));
-  }
-
-  /// Change the user's email.
-  ///
-  /// [email] - The new email.
-  Future<void> changeEmail(String email) async {
-    final user = await _apiClient.updateUser(email: email);
+  /// [name] - The new name of the user.
+  Future<void> updateUser({
+    String? name,
+    String? email,
+  }) async {
+    final user = await _apiClient.updateUser(name: name, email: email);
     _userController.add(User.fromApi(user));
   }
 

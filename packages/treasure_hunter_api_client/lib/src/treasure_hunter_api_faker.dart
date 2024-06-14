@@ -33,31 +33,18 @@ class TreasureHunterApiFaker {
     return User.fromJson(userJson);
   }
 
-  Future<User> updateUser({
-    String? name,
-    String? email,
-  }) async {
-    final currentUser = await fetchCurrentUser();
-    final updatedUser = currentUser.copyWith(
-      name: name ?? currentUser.name,
-      email: email ?? currentUser.email,
-    );
-
+  Future<void> updateUser(User updatedUser) async {
     await _storage.write(
       key: TreasureHunterApiFakerStorageKeys.currentUser,
       value: jsonEncode(updatedUser.toJson()),
     );
-
-    return updatedUser;
   }
 
-  Future<List<Treasure>> updateUserTreasures(List<Treasure> treasures) async {
+  Future<void> updateUserTreasures(List<Treasure> treasures) async {
     await _storage.write(
       key: TreasureHunterApiFakerStorageKeys.userTreasures,
       value: jsonEncode(treasures),
     );
-
-    return treasures;
   }
 
   Future<List<Treasure>> fetchUserTreasures() async {
