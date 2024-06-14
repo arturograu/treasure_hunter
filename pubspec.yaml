@@ -29,6 +29,8 @@ dependencies:
     path: packages/treasures_repository
   user_repository:
     path: packages/user_repository
+  form_inputs:
+    path: packages/form_inputs
 
 dev_dependencies:
   bloc_test: ^9.1.6

@@ -8,7 +8,7 @@ class AppEmailTextField extends StatelessWidget {
   /// {@macro app_email_text_field}
   const AppEmailTextField({
     super.key,
-    this.controller,
+    this.initialValue,
     this.label,
     this.hintText,
     this.suffix,
@@ -18,7 +18,7 @@ class AppEmailTextField extends StatelessWidget {
   });
 
   /// Controls the text being edited.
-  final TextEditingController? controller;
+  final String? initialValue;
 
   /// Text that describes the input field.
   final String? label;
@@ -42,7 +42,6 @@ class AppEmailTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-      controller: controller,
       label: label,
       hintText: hintText,
       keyboardType: TextInputType.emailAddress,
@@ -52,6 +51,7 @@ class AppEmailTextField extends StatelessWidget {
       errorText: errorText,
       onChanged: onChanged,
       suffix: suffix,
+      initialValue: initialValue,
     );
   }
 }

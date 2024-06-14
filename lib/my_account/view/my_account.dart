@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:treasure_hunter/app/cubit/app_cubit.dart';
 import 'package:treasure_hunter/l10n/l10n.dart';
+import 'package:treasure_hunter/my_account/cubit/my_account_cubit.dart';
 import 'package:treasure_hunter/my_account/my_account.dart';
 
 class MyAccount extends StatelessWidget {
@@ -14,9 +17,14 @@ class MyAccount extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.myAccountPageTitle),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16),
-        child: UserForm(),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: BlocProvider(
+          create: (_) => MyAccountCubit(
+            user: context.read<AppCubit>().state.user,
+          ),
+          child: const UserForm(),
+        ),
       ),
     );
   }
