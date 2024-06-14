@@ -10,14 +10,12 @@ class UserForm extends StatelessWidget {
       children: [
         const AppTextField(
           key: Key('myAccountForm_nameInput_textField'),
-          label: 'Email',
-          hintText: 'John',
+          label: 'Name',
         ),
         const SizedBox(height: 22),
         const AppEmailTextField(
           key: Key('myAccountForm_emailInput_textField'),
           label: 'Email',
-          hintText: 'john.doe@gmail.com',
         ),
         const Spacer(),
         SizedBox(
