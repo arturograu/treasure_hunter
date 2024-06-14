@@ -19,6 +19,14 @@ class TreasureHunt extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Welcome ${appState.user.name}!'),
+        leading: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.favorite_rounded),
+            SizedBox(width: 4),
+            _FavouriteTreasuresCounter(),
+          ],
+        ),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -33,6 +41,22 @@ class TreasureHunt extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _FavouriteTreasuresCounter extends StatelessWidget {
+  const _FavouriteTreasuresCounter();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AppCubit, AppState>(
+      builder: (context, state) {
+        return Text(
+          state.userFavouriteTreasures.length.toString(),
+          textAlign: TextAlign.center,
+        );
+      },
     );
   }
 }
