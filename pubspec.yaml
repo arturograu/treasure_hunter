@@ -22,7 +22,7 @@ dependencies:
   intl: ^0.19.0
   persistent_storage:
     path: packages/storage/persistent_storage
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.1
   treasure_hunter_api_client:
     path: packages/treasure_hunter_api_client
   treasures_repository:
